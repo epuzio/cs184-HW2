@@ -1,7 +1,7 @@
-import {StyleSheet, View, TextInput, KeyboardAvoidingView} from 'react-native';
+import {StyleSheet, View, TextInput, Text, KeyboardAvoidingView, ActivityIndicator, Button} from 'react-native';
 import React, { useState} from 'react';
 import {FIREBASE_AUTH} from '../FirebaseConfig.tsx';
-import { createUserWithEmailAndPassword } from 'firebase/auth';
+import { createUserWithEmailAndPassword, signInWithEmailAndPassword } from 'firebase/auth';
 
 const Login = () => {
     const [email, setEmail] = useState('');
@@ -12,7 +12,7 @@ const Login = () => {
     const signIn = async () => {
         setLoading(true);
         try {
-            const response = await auth.signInWithEmailAndPassword(auth, email, password);
+            const response = await signInWithEmailAndPassword(auth, email, password);
             console.log(response);
         } catch (error){
             console.log(error)
@@ -34,36 +34,52 @@ const Login = () => {
         }
     }
 
-
-
     return (
         <View style={styles.container}>
             <KeyboardAvoidingView behavior='padding'>
-                <TextInput value={email} style={styles.input}>Login with Firebase</TextInput>
-                <TextInput secureTextEntry={true} value={password} style={styles.input}>password</TextInput>
+                <TextInput value={email} style={styles.input} placeholder="email" autoCapitalize='none' onChangeText={(text) => setEmail(text)}></TextInput>
+                <TextInput secureTextEntry={true} value={password} style={styles.input} placeholder="password" autoCapitalize='none' onChangeText={(text) => setPassword(text)}></TextInput>
             </KeyboardAvoidingView>
+            { loading ? (<ActivityIndicator size="large" color="#0000ff"/>
+            ): (
+                <>
+                    <Button title="Login" onPress={() => signIn()} />
+                </>
+            )}
         </View>
     );
 };
 export default Login;
 
 const styles = StyleSheet.create({
+    
     container: {
-      flex: 1,
-      padding: 24,
-      backgroundColor: '#eaeaea',
+        marginHorizontal: 20,
+        flex: 1,
+        justifyContent: 'center',
+        backgroundColor: '#eaeaea',
     },
     input: {
-      marginTop: 16,
-      paddingVertical: 8,
-      borderWidth: 4,
-      borderColor: '#20232a',
-      borderRadius: 6,
-      backgroundColor: '#61dafb',
-      color: '#20232a',
-      textAlign: 'center',
-      fontSize: 30,
-      fontWeight: 'bold',
+        marginVertical: 4,
+        height: 50,
+        borderWidth: 4,
+        borderColor: '#4421ea',
+        borderRadius: 6,
+        backgroundColor: '#eeeeee',
+        color: '#000',
+        textAlign: 'center',
+        fontSize: 20,
+        fontWeight: 'bold',
+        fontFamily: 'PT Sans',
     },
+    text: {
+        fontSize: 30,
+        color: '#000',
+    },
+    button: {
+        backgroundColor: 'blue',
+        borderRadius: 10,
+        padding: 10,
+      },
   });
 

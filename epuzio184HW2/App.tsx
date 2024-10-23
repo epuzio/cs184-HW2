@@ -1,21 +1,24 @@
 import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
+import ToDoList from './app/ToDoList.tsx';
+import LandingPage from './app/LandingPage.tsx';
 import Login from './app/Login.tsx';
-import List from './app/List.tsx';
+import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 // import Details from './app/Details.tsx';
 import { FIREBASE_AUTH } from './FirebaseConfig.tsx';
 import {useEffect, useState} from 'react';
-import { onAuthStateChanged, User } from 'firebase/auth';
+import { getAuth, onAuthStateChanged, User } from 'firebase/auth';
 
 const Stack = createNativeStackNavigator();
 const InsideStack = createNativeStackNavigator();
+const Tab = createBottomTabNavigator();
 
 function InsideLayout(){
     return (
-        <InsideStack.Navigator>
-            <InsideStack.Screen name= "Inside" component={List} />
-            <InsideStack.Screen name= "Details" component={Details} />
-        </InsideStack.Navigator>
+        <Tab.Navigator>
+            <Tab.Screen name= "Home" component={LandingPage} />
+            <Tab.Screen name= "To Do List" component={ToDoList} />
+        </Tab.Navigator>
     );
 }
 export default function App(){
