@@ -1,9 +1,9 @@
 import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
-import Login from './app/Login';
-import List from './app/List';
-import Details from './app/Details';
-import { FIREBASE_AUTH } from './FirebaseConfig';
+import Login from './app/Login.tsx';
+import List from './app/List.tsx';
+// import Details from './app/Details.tsx';
+import { FIREBASE_AUTH } from './FirebaseConfig.tsx';
 import {useEffect, useState} from 'react';
 import { onAuthStateChanged, User } from 'firebase/auth';
 
