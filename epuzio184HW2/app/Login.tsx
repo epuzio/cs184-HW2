@@ -44,6 +44,7 @@ const Login = () => {
             ): (
                 <>
                     <Button title="Login" onPress={() => signIn()} />
+                    <Button title="Sign Up" onPress={() => signUp()} />
                 </>
             )}
         </View>
@@ -57,7 +58,7 @@ const styles = StyleSheet.create({
         marginHorizontal: 20,
         flex: 1,
         justifyContent: 'center',
-        backgroundColor: '#eaeaea',
+        backgroundColor: '#ffffff',
     },
     input: {
         marginVertical: 4,
